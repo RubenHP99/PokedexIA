@@ -14,6 +14,7 @@ import {
 
 const POKEMON_TYPE_COLORS = {
   normal: '#A8A77A',
+  fairy: '#CFB7C5',
   fire: '#EE8130',
   water: '#6390F0',
   electric: '#F7D02C',
@@ -106,10 +107,8 @@ export default function PokemonInfo() {
               datasets: [
                 {
                   data: Object.values(pokemon.stats),
-                  backgroundColor: pokemon.types.length > 1
-                    ? POKEMON_TYPE_COLORS[pokemon.types[1].type.name] + '80'
-                    : POKEMON_TYPE_COLORS[pokemon.types[0].type.name] + '80',                  
-                  borderColor: POKEMON_TYPE_COLORS[pokemon.types[0].type.name],
+                  backgroundColor: type2Color + '80',                  
+                  borderColor: type1Color,
                   borderWidth: 5,
                 },
               ],

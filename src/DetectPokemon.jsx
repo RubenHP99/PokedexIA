@@ -19,68 +19,6 @@ export default function DetectPokemon() {
   useEffect(() => {
     startCamera();
 
-    //   "id": 1,
-    //   "detected": true,
-    //   "name": "Bulbasaur",
-    //   "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png",
-    //   "animatedSprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/1.gif",
-    //   "abilities": [
-    //     {
-    //       "slot": 1,
-    //       "ability": {
-    //         "name": "overgrow",
-    //         "url": "https://pokeapi.co/api/v2/ability/65/"
-    //       }
-    //     },
-    //     {
-    //       "slot": 3,
-    //       "ability": {
-    //         "name": "chlorophyll",
-    //         "url": "https://pokeapi.co/api/v2/ability/34/"
-    //       }
-    //     }
-    //   ],
-    //   "types": [
-    //     {
-    //       "slot": 1,
-    //       "type": {
-    //         "name": "grass",
-    //         "url": "https://pokeapi.co/api/v2/type/12/"
-    //       }
-    //     },
-    //     {
-    //       "slot": 2,
-    //       "type": {
-    //         "name": "poison",
-    //         "url": "https://pokeapi.co/api/v2/type/4/"
-    //       }
-    //     }
-    //   ],
-    //   "stats": {
-    //     "hp": 45,
-    //     "attack": 49,
-    //     "defense": 49,
-    //     "special-attack": 65,
-    //     "special-defense": 65,
-    //     "speed": 45
-    //   },
-    //   "moves": [
-    //     {
-    //       "move": {
-    //         "name": "razor-wind",
-    //         "url": "https://pokeapi.co/api/v2/move/13/"
-    //       }
-    //     },
-    //     {
-    //       "move": {
-    //         "name": "swords-dance",
-    //         "url": "https://pokeapi.co/api/v2/move/14/"
-    //       }
-    //     }
-    //   ]
-    // };
-    // addInfoToPokemonList(prueba);
-
     // Parar la camara de forma ordenada al desmontar el componente
     return () => {
       if (videoRef.current && videoRef.current.srcObject) {
