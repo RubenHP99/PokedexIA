@@ -1,0 +1,172 @@
+
+
+@font-face {
+  font-family: 'Pixel';
+  src: url('/Jersey10-Regular.ttf');
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  align-items: center;
+  background-color: #DC0A2D;
+  font-synthesis: none;
+  font-family: "Pixel";
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1{
+  color: #000;
+  text-align: center;
+  font-size: 18vmin;
+  margin: 2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0px 5px black, 0px -5px black, 5px 0px black, -5px 0px black, 0px 10px #00000038, 5px 5px #00000038, -5px 5px #00000038, inset 0px 5px #ffffff1f, inset 0px -5px #00000030;
+}
+
+h2{
+  color: #000;
+  text-align: center;
+  font-size: 11vmin;
+  margin: 2rem;
+  padding: 0.5rem;
+  background-color: white;
+  box-shadow: 0px 5px black, 0px -5px black, 5px 0px black, -5px 0px black, 0px 10px #00000038, 5px 5px #00000038, -5px 5px #00000038, inset 0px 5px #ffffff1f, inset 0px -5px #00000030;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 5px black, 0px -5px black, 5px 0px black, -5px 0px black, 0px 10px #00000038, 5px 5px #00000038, -5px 5px #00000038, inset 0px 5px #ffffff1f, inset 0px -5px #00000030;
+  padding-bottom: 5px;
+  margin: 2rem;
+}
+
+.pixelMenuButton {
+    color: #000;
+    background-color: #7eab64;
+    padding: 10px;
+    margin: 1rem;
+    font-size: 10vw;
+    font-family: "Pixel";
+    border: 0;
+    box-shadow: 0px 5px black, 0px -5px black, 5px 0px black, -5px 0px black, 0px 10px #00000038, 5px 5px #00000038, -5px 5px #00000038, inset 0px 5px #ffffff1f, inset 0px -5px #00000030;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pixelMenuButton:active {
+    transform: translateY(5px);
+    box-shadow: 0px 5px black, 0px -5px black, 5px 0px black, -5px 0px black, 0px 10px #00000038, 5px 5px #00000038, -5px 5px #00000038, inset 0px 5px #ffffff1f, inset 0px -5px #00000030;
+}
+
+.pixelMenuButton:disabled {
+    background-color: #4e6341;
+}
+
+.pixelMenuButton img {
+  width: 20vw;
+  height: auto;
+  margin: -0.4rem;
+}
+
+video{
+  width: 90%;
+  height: auto;
+  box-shadow: 0px 5px black, 0px -5px black, 5px 0px black, -5px 0px black, 0px 10px #00000038, 5px 5px #00000038, -5px 5px #00000038, inset 0px 5px #ffffff1f, inset 0px -5px #00000030;
+  margin: 1rem;
+}
+
+.camera-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+/* Media Queries para adaptar los botones y el título */
+/* @media (max-width: 768px) {
+    .camera-button {
+        font-size: 7vw;
+        padding: 10px 20px;
+    }
+    .camera-title {
+        font-size: 10vmin;
+    }
+}
+
+@media (max-width: 480px) {
+    .camera-button {
+        font-size: 8vw;
+        padding: 8px 15px;
+    }
+    .camera-title {
+        font-size: 12vmin;
+    }
+} */
+
+
+
+.pokemon-list {
+  list-style-type: none;
+  padding: 0;
+  
+  display: flex; 
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  
+}
+
+.pokemon-list-item {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+
+.alertPopup {
+  font-size: 1.5rem;
+  border: solid 0.4rem #000;
+}
+
+
+.alertConfirmButton {
+  color: #000;
+  background-color: #7eab64;
+  padding: 1rem;
+  font-size: 10vw;
+  font-family: "Pixel";
+  border: solid 0.4rem #000;
+
+}
