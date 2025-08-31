@@ -70,7 +70,8 @@ export default function PokemonInfo() {
   async function geminiAPIRequest(){
 
     try {
-        const genAI = new GoogleGenerativeAI("AIzaSyB1C0tFYY54MSv_l41vKYB9xl5DZSWuZk0");
+        const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+        const genAI = new GoogleGenerativeAI(API_KEY);
         const model = genAI.getGenerativeModel({ model: "gemma-3-27b-it" });
 
         const prompt = `Dame la descripción de la pokedex del pokemon ${pokemon.name} en español del juego pokemon esmeralda.\
