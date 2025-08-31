@@ -38,7 +38,35 @@ export default function DetectPokemon() {
     return expanded;
   };
 
-  const runInference = async () => {
+
+  async function getPokemonAPITypes(urls) {
+    try {
+      const fetchPromises = urls.map(url => fetch(url));
+      const responses = await Promise.all(fetchPromises);
+
+      for (const response of responses) {
+        if (!response.ok) {
+          throw new Error(`Error HTTP! Estado: ${response.status} en la URL: ${response.url}`);
+        }
+      }
+
+      const dataPromises = responses.map(response => response.json());
+      const data = await Promise.all(dataPromises);
+
+      const spriteTypes = data.map(type => {
+        return {'name': type.name, 'sprite': type.sprites['generation-viii']['sword-shield']};
+      });
+
+      return spriteTypes;
+
+    } catch (error) {
+      console.error("Fallo al obtener los datos de una o más URLs:", error);
+      return null;
+    }
+  }
+
+
+  async function runInference(){
 
     if (!model) {
       console.error('El modelo no está cargado.');
@@ -65,7 +93,7 @@ export default function DetectPokemon() {
       var alertText = `No se ha detectado ningún Pokémon con una precisión suficiente.`;
       var alertImage = 'question.png';
 
-      if (prob > 50){
+      if (prob > 98){
         
         // Conectarse a pokeAPI y obtener los datos del Pokémon
         try {
@@ -120,6 +148,9 @@ export default function DetectPokemon() {
             alertText = `Has detectado a un <u>${pokemonName}</u> #${pokedexNumber} con un <u>${prob}%</u> de precisión.`;
             alertImage = sprite || 'question.png';
 
+            const typeURLs = data.types.map(typeObject => typeObject.type.url);
+            const types = await getPokemonAPITypes(typeURLs);
+
             const pokemonInfo = {
               id: pokedexNumber,
               detected: true,
@@ -127,7 +158,7 @@ export default function DetectPokemon() {
               sprite: sprite,
               animatedSprite: animatedSprite,
               abilities: data.abilities,
-              types: data.types,
+              types: types,
               stats: stats,
               moves: moves
             };

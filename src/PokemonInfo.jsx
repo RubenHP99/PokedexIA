@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import BackButton from './BackButton.jsx';
 import { useLocation } from 'react-router-dom';
 import { Radar } from 'react-chartjs-2';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import Swal from 'sweetalert2';
+
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -36,8 +39,8 @@ export default function PokemonInfo() {
   const location = useLocation();
   const pokemon = location.state?.pokemonData;
 
-  const type1Color = POKEMON_TYPE_COLORS[pokemon.types[0].type.name];
-  const type2Color = pokemon.types.length > 1 ? POKEMON_TYPE_COLORS[pokemon.types[1].type.name] : type1Color;
+  const type1Color = POKEMON_TYPE_COLORS[pokemon.types[0].name];
+  const type2Color = pokemon.types.length > 1 ? POKEMON_TYPE_COLORS[pokemon.types[1].name] : type1Color;
   
   ChartJS.register(
     RadialLinearScale,
@@ -53,16 +56,55 @@ export default function PokemonInfo() {
   }, []);
 
 
-  function getDescription() {
-    alert("DESCRIPCION")
+  function speakText(textToSpeak) {
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+
+    utterance.rate = 1.5;
+    utterance.pitch = 1.5;
+    utterance.lang = 'es-ES';
+
+    window.speechSynthesis.speak(utterance);
   }
+
+
+  async function geminiAPIRequest(){
+
+    try {
+        const genAI = new GoogleGenerativeAI("AIzaSyB1C0tFYY54MSv_l41vKYB9xl5DZSWuZk0");
+        const model = genAI.getGenerativeModel({ model: "gemma-3-27b-it" });
+
+        const prompt = `Dame la descripción de la pokedex del pokemon ${pokemon.name} en español del juego pokemon esmeralda.\
+        Solo quiero la descripción de la pokedex, nada más.`;
+
+        const result = await model.generateContent(prompt);
+        const response = result.response;
+        const text = response.text();
+        
+        speakText(text);
+        
+        Swal.fire({
+            text: text,
+            confirmButtonText: 'Aceptar',
+                customClass: {
+                popup: 'alertPopup',
+                confirmButton: 'alertConfirmButton',
+                }
+        }); 
+
+
+    } catch (err) {
+      console.error("Error al conectar con la API de Gemini:", err);
+      alert(err.message);
+    } finally {
+    }
+  };
 
 
   return (
     <div>
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 20, marginBottom: -20}}>
-          <BackButton />
+          <BackButton/>
           <h2 style={{ margin: 0 }}>{pokemon.name} #{pokemon.id}</h2>
       </div>
     
@@ -91,16 +133,28 @@ export default function PokemonInfo() {
           />
         </div>
 
-        <button className='pixelMenuButton' onClick={getDescription}> Descripción </button>
+        <button className='pixelMenuButton' onClick={geminiAPIRequest}> Descripción IA </button>
 
-        <p style={{fontSize: '2rem'}}>TIPO: {JSON.stringify(pokemon.types.map(typeObject => typeObject.type.name))}</p>
-        <hr width={"80%"}/>
+        <p style={{fontSize: '2rem', marginBottom: 0}}>TIPO/S</p>
 
-        <p style={{fontSize: '2rem'}}>HABILIDADES: {JSON.stringify(pokemon.abilities.map(abilityObject => abilityObject.ability.name))}</p>
-        <hr width={"80%"}/>
+        <div>
+          {pokemon.types.map((type, index) => (
+            <div key={index}>
+              <img src={type.sprite.name_icon}  style={{width: '10rem', marginTop: '1rem'}}/>
+            </div>
+          ))}
+        </div>
 
-        <p style={{fontSize: '2rem'}}>ESTADÍSTICAS</p>
-        <div style={{ width: '17rem', height: '17rem', padding: '0.5rem', marginTop: '-2rem'}}>
+        <hr width={"80%"} style={{marginTop: '2rem'}}/>
+
+        <p style={{fontSize: '2rem', marginBottom: 0}}>HABILIDADES</p>
+        <div style={{fontSize: '1.5rem'}}>
+          {JSON.stringify(pokemon.abilities.map(abilityObject => abilityObject.ability.name))}
+        </div>
+        <hr width={"80%"} style={{marginTop: '2rem'}}/>
+
+        <p style={{fontSize: '2rem', marginBottom: 0}}>ESTADÍSTICAS</p>
+        <div style={{ width: '17rem', height: '17rem', padding: '0.5rem'}}>
           <Radar 
             data={{
               labels: Object.keys(pokemon.stats),
@@ -143,10 +197,10 @@ export default function PokemonInfo() {
           />
         </div>
 
-        <hr width={"80%"}/>
-        <p style={{fontSize: '2rem'}}>MOVIMIENTOS</p>
+        <hr width={"80%"} style={{marginTop: '2rem'}}/>
+        <p style={{fontSize: '2rem', marginBottom: 0}}>MOVIMIENTOS</p>
 
-        <div style={{overflowX: 'auto', width: '100%', marginTop: '-2rem'}}>
+        <div style={{overflowX: 'auto', width: '100%'}}>
           <table style={{margin: '1rem', border: '2px solid black', borderCollapse: 'collapse'}}>
             <thead style={{ backgroundColor: '#222', color: 'white', border: '2px solid black' }}>
               <tr>
