@@ -16,6 +16,17 @@
 
 ---
 
+<h2>📸 Galería de la Interfaz de Usuario (UI)</h2>
+
+<div align="center" style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+  <img src="readmeImages/mainMenu.jpg" alt="Captura de pantalla: Menú Principal de la Pokedex IA" style="width: 20%; min-width: 100px; max-width: 150px; border: 1px solid #ddd; border-radius: 8px;"/>
+  <img src="readmeImages/pokemonDetected.jpg" alt="Captura de pantalla: Pokémon detectado con su nivel de confianza" style="width: 20%; min-width: 100px; max-width: 150px; border: 1px solid #ddd; border-radius: 8px;"/>
+  <img src="readmeImages/pokemonInfo.jpg" alt="Captura de pantalla: Pantalla de información detallada del Pokémon" style="width: 20%; min-width: 100px; max-width: 150px; border: 1px solid #ddd; border-radius: 8px;"/>
+  <img src="readmeImages/pokemonList.jpg" alt="Captura de pantalla: Lista de Pokémon con criaturas bloqueadas y desbloqueadas" style="width: 20%; min-width: 100px; max-width: 150px; border: 1px solid #ddd; border-radius: 8px;"/>
+</div>
+
+---
+
 <h2>⚙️ Tecnologías Utilizadas</h2>
 <table>
   <thead>
@@ -74,7 +85,7 @@
 <p>La matriz de confusión del modelo optimizado a INT8 demuestra la capacidad de nuestro YOLOv11 nano para distinguir entre los 151 Pokémon. Las métricas clave (Precisión, Recall y mAP) se mantuvieron robustas incluso después de la cuantificación.</p>
 
 <div align="center">
-  <img src="confusionMatrix.png" alt="Matriz de Confusión del Modelo YOLOv11 nano optimizado a INT8" width="700"/>
+  <img src="readmeImages/confusion_matrix_normalized.png" alt="Matriz de Confusión del Modelo YOLOv11 nano optimizado a INT8" width="700"/>
 </div>
 
 <h2>🚀 Instalación y Despliegue Local</h2>
@@ -88,18 +99,20 @@
 </ul>
 
 <h3>Pasos del Despliegue</h3>
-<pre><code># 1. Clona el repositorio y navega al directorio del proyecto
+<pre><code>
+  
+# 1. Clonar el repositorio y acceder al directorio del proyecto
 git clone https://github.com/RubenHP99/PokedexIA.git
 cd pokedexIA
 
-# 2. Instala las dependencias de Node.js
+# 2. Instalar las dependencias de Node.js
 npm install
 
-# 3. Configura las variables de entorno
-# Crea un archivo .env en la raíz y añade tu clave de Gemini
+# 3. Configurar las variables de entorno
+# Crear un archivo .env en la raíz y añadir la clave de Gemini
 echo "VITE_GEMINI_API_KEY=TU_CLAVE_AQUI" > .env
 
-# 4. Despliega la aplicación en modo desarrollo (usa Vite)
+# 4. Desplegar la aplicación en modo desarrollo (usando Vite)
 npm run dev</code></pre>
 
 <p>La aplicación se iniciará y estará disponible en tu navegador, generalmente en <code>http://localhost:5173</code>.</p>
